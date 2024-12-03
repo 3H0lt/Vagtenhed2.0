@@ -4,8 +4,6 @@
 #define SS_PIN D8   // NSS pin
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
-String tagUID1 = "6B CE 2F E3";    // String med UID for tag#1. Tilpas til jeres tag!!!
-String tagUID2 = "BC 80 EB 38";    // String med UID for tag#2. Tilpas til jeres tag!!!
 String tagOLD = "";
 
 void setup() {
