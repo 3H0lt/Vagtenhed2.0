@@ -32,15 +32,9 @@ void loop() {
         tag.concat(String(mfrc522.uid.uidByte[i], HEX));
       }
       tag.toUpperCase();
-      if (tag.substring(1) == tagUID1 && tagOLD.substring(1) != tag.substring(1)) {  // Hvis UIDfra tag #1 er fundet.
+      if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
         tagOLD = tag;
-        Serial.println(F("Found Tag #1!"));
-      } else if (tag.substring(1) == tagUID2 && tagOLD.substring(1) != tag.substring(1)) {  //Hvis UID fra tag #2 er fundet.
-        tagOLD = tag;
-        Serial.println(F("Found Tag #2!"));
-      } else if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
-        tagOLD = tag;
-        Serial.print(F("Found Nonreg. Tag! "));
+        
         Serial.println(tag);
       }
     }
