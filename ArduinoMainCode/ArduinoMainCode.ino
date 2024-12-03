@@ -3,6 +3,8 @@
 #include <MFRC522.h>
 #define RST_PIN D3  // Reset Pin
 #define SS_PIN D8   // NSS pin
+#define SCL_PIN D1 // ?
+#define SDA_PIN D2 // ?
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 String tagOLD = "";
