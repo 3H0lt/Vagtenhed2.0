@@ -13,12 +13,16 @@ void setup() {
 }
 
 void draw() {
-
 }
 
 void serialEvent(Serial myPort) {
   receivedData = myPort.readStringUntil('\n'); // Read until a newline
   receivedData = trim(receivedData); // Remove any extra whitespace
   println(receivedData); // Print the data to the console
-  
+  if (receivedData != ".") {
+    String hexNumber = receivedData;
+    int decimalNumber = Integer.parseInt(hexNumber, 16);
+    System.out.println("Hexadecimal: " + hexNumber);
+    System.out.println("Decimal: " + decimalNumber);
+  }
 }
