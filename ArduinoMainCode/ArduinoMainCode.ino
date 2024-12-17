@@ -21,7 +21,7 @@ void setup() {
 void loop() {
   delay(500);
   if (!mfrc522.PICC_IsNewCardPresent()) {  // Gør intet, hvis kortet ikke er nyt.
-    Serial.print(".");
+    Serial.println(".");
   } else {
     if (!mfrc522.PICC_ReadCardSerial()) {  //Laes PICC
       Serial.println("Kan ikke laese UID");
@@ -32,16 +32,11 @@ void loop() {
         tag.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
         tag.concat(String(mfrc522.uid.uidByte[i], HEX));
         tag.toUpperCase();
-        String hexNumber = tag;  // Example hexadecimal number
-        int decimalNumber = Integer.parseInt(hexNumber, 16);
-        System.out.println("Hexadecimal: " + hexNumber);
-        System.out.println("Decimal: " + decimalNumber);
       }
 
       if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
         tagOLD = tag;
-
-        Serial.println(decimalNumber);
+        Serial.println(tag);
       }
     }
   }
