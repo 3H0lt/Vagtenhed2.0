@@ -30,14 +30,17 @@ void loop() {
       String tag = "";
       for (byte i = 0; i < mfrc522.uid.size; i++) {
         tag.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-        tag.concat(String(mfrc522.uid.uidByte[i],DEC));
-       
+        tag.concat(String(mfrc522.uid.uidByte[i],HEX));
+        String hexNumber = Tag; // Example hexadecimal number
+        int decimalNumber = Integer.parseInt(hexNumber, 16);
+        System.out.println("Hexadecimal: " + hexNumber);
+        System.out.println("Decimal: " + decimalNumber);
       }
       tag.toUpperCase();
       if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
         tagOLD = tag;
         
-        Serial.println(tag);
+        Serial.println(decimalNumber);
       }
     }
   }
