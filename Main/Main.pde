@@ -16,10 +16,9 @@ void draw() {
 }
 
 void serialEvent(Serial myPort) {
-  receivedData = myPort.readStringUntil('\n'); // Read until a newline
-  receivedData = trim(receivedData); // Remove any extra whitespace
-  println(receivedData); // Print the data to the console
-  if (receivedData != ".") {
+  if (receivedData != null) {
+    receivedData = myPort.readStringUntil('\n'); // Read until a newline
+    receivedData = trim(receivedData);
     String hexNumber = receivedData;
     int decimalNumber = parseIntOrNull(hexNumber);
     System.out.println("Hexadecimal: " + hexNumber);
