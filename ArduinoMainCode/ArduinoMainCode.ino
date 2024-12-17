@@ -3,9 +3,9 @@
 #include <MFRC522.h>
 #define RST_PIN D3  // Reset Pin
 #define SS_PIN D8   // NSS pin
-#define SCL_PIN D1 // ?
-#define SDA_PIN D2 // ?
-
+#define SCL_PIN D1  // ?
+#define SDA_PIN D2  // ?
+long decimalNumber = 0;
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 String tagOLD = "";
 
@@ -30,16 +30,27 @@ void loop() {
       String tag = "";
       for (byte i = 0; i < mfrc522.uid.size; i++) {
         tag.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-        tag.concat(String(mfrc522.uid.uidByte[i],HEX));
-        String hexNumber = Tag; // Example hexadecimal number
-        int decimalNumber = Integer.parseInt(hexNumber, 16);
-        System.out.println("Hexadecimal: " + hexNumber);
-        System.out.println("Decimal: " + decimalNumber);
+        tag.concat(String(mfrc522.uid.uidByte[i], HEX));
+        // Convert the tag (hexadecimal string) to uppercase for consistency
+        tag.toUpperCase();
+
+        // Remove any leading spaces
+        String hexNumber = tag;
+        hexNumber.trim();  // Remove any leading/trailing whitespace
+
+        // Convert hexadecimal string to decimal
+        char hexStr[hexNumber.length() + 1];
+        hexNumber.toCharArray(hexStr, hexNumber.length() + 1);
+        long decimalNumber = strtol(hexStr, NULL, 16);
+
+        // Print Hexadecimal and Decimal values
+        Serial.println("Hexadecimal: " + hexNumber);
+        Serial.print("Decimal: ");
+        Serial.println(decimalNumber);
       }
-      tag.toUpperCase();
       if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
         tagOLD = tag;
-        
+
         Serial.println(decimalNumber);
       }
     }
