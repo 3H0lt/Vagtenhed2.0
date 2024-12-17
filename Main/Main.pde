@@ -21,8 +21,16 @@ void serialEvent(Serial myPort) {
   println(receivedData); // Print the data to the console
   if (receivedData != ".") {
     String hexNumber = receivedData;
-    int decimalNumber = Integer.parseInt(hexNumber, 16);
+    int decimalNumber = tryParseInt(hexNumber, 16);
     System.out.println("Hexadecimal: " + hexNumber);
     System.out.println("Decimal: " + decimalNumber);
   }
+}
+
+public int tryParseInt(String value, int defaultVal) {
+    try {
+        return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+        return defaultVal;
+    }
 }
