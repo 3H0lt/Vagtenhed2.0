@@ -30,7 +30,8 @@ void loop() {
       String tag = "";
       for (byte i = 0; i < mfrc522.uid.size; i++) {
         tag.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-        tag.concat(String(mfrc522.uid.uidByte[i], HEX));
+        tag.concat(String(mfrc522.uid.uidByte[i],DEC));
+       
       }
       tag.toUpperCase();
       if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
