@@ -13,23 +13,15 @@ void setup() {
 }
 
 void draw() {
-}
-
-void serialEvent(Serial myPort) {
+  if ( myPort.available() > 0) //Er data parat?
+{
+receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
   if (receivedData != null) {
-    receivedData = myPort.readStringUntil('\n'); // Read until a newline
     receivedData = trim(receivedData);
     String hexNumber = receivedData;
-    int decimalNumber = parseIntOrNull(hexNumber);
+    int decimalNumber = Integer.parseInt(hexNumber,16);
     System.out.println("Hexadecimal: " + hexNumber);
     System.out.println("Decimal: " + decimalNumber);
   }
 }
-
-public Integer parseIntOrNull(String value) {
-    try {
-        return Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-        return null;
-    }
 }
