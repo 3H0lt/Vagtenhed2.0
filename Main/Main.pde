@@ -19,9 +19,17 @@ receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
   if (receivedData != null && receivedData != ".") {
     receivedData = trim(receivedData);
     String hexNumber = receivedData;
-    int decimalNumber = Integer.parseInt(hexNumber,16);
+    int decimalNumber = parseIntOrNull(hexNumber);
     System.out.println("Hexadecimal: " + hexNumber);
     System.out.println("Decimal: " + decimalNumber);
   }
 }
+}
+
+public Integer parseIntOrNull(String value) {
+    try {
+        return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+        return null;
+    }
 }
