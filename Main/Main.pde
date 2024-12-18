@@ -16,6 +16,9 @@ void draw() {
   if ( myPort.available() > 0) //Er data parat?
 {
 receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
+split(receivedData,' ');
+println(receivedData);
+
   if (receivedData != null && receivedData != ".") {
     receivedData = trim(receivedData);
     String hexNumber = receivedData;
