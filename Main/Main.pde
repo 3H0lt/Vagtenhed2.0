@@ -21,7 +21,12 @@ void draw() {
 
 
     if (receivedData != null && receivedData != "." && receivedData.length() > 5) {
-      
+       receivedData = trim(receivedData);
+      dataSplitted = split(receivedData, ' ');
+      println(dataSplitted[0]);
+      String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
+      println(hexNumber);
+      /*
       receivedData = trim(receivedData);
       dataSplitted = split(receivedData, ' ');
       println(dataSplitted[0]);
@@ -35,7 +40,7 @@ void draw() {
         }
       System.out.println("Hexadecimal: " + hexNumber);
       System.out.println("Decimal: " + decimalNumberString);
-  
+  */
     }
   }
 }
