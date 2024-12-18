@@ -18,7 +18,8 @@ void draw() {
     receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
 
-    if (receivedData != null && receivedData != ".") {
+    if (receivedData != null && receivedData != "." && receivedData.length() < 5) {
+      
       receivedData = trim(receivedData);
       dataSplitted = split(receivedData, ' ');
       println(dataSplitted[0]);
