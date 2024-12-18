@@ -29,7 +29,7 @@ void draw() {
      for (int i =0 ;i == 3; i++){
       decimalNumber[i] = Integer.parseInt(dataSplitted[i],16);
      }
-      
+      println("succesfully parsed");
         for (int i = 0; i < 4; i++) {
           decimalNumberString += decimalNumber[i];
         }
