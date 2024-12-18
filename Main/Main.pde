@@ -3,7 +3,7 @@ import processing.serial.*; // Import the Serial library
 
 Serial myPort; // Declare a Serial object
 String receivedData; // Variable to store the incoming data
-
+String[] dataSplitted;
 void setup() {
   size(400, 200); // Create a window
   println(Serial.list()); // List all available serial ports
@@ -16,8 +16,9 @@ void draw() {
   if ( myPort.available() > 0) //Er data parat?
 {
 receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
-split(receivedData,' ');
-println(receivedData);
+dataSplitted = split(receivedData,' ');
+trim(receivedData);
+println(dataSplitted[0]);
 
   if (receivedData != null && receivedData != ".") {
     receivedData = trim(receivedData);
