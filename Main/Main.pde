@@ -14,27 +14,28 @@ void setup() {
 
 void draw() {
   if ( myPort.available() > 0) //Er data parat?
-{
-receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
-dataSplitted = split(receivedData,' ');
-trim(receivedData);
-println(dataSplitted[0]);
+  {
+    receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
-  if (receivedData != null && receivedData != ".") {
-    receivedData = trim(receivedData);
-    String hexNumber = receivedData;
-    int decimalNumber = parseIntOrNull(hexNumber);
-    System.out.println("Hexadecimal: " + hexNumber);
-    System.out.println("Decimal: " + decimalNumber);
+
+    if (receivedData != null && receivedData != ".") {
+      receivedData = trim(receivedData);
+      dataSplitted = split(receivedData, ' ');
+      println(dataSplitted[0]);
+      String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
+      int decimalNumber = parseIntOrNull(hexNumber);
+      System.out.println("Hexadecimal: " + hexNumber);
+      System.out.println("Decimal: " + decimalNumber);
+    }
   }
-}
 }
 
 public Integer parseIntOrNull(String value) {
   println(value);
-    try {
-        return Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-        return 0;
-    }
+  try {
+    return Integer.parseInt(value);
+  }
+  catch (NumberFormatException e) {
+    return 0;
+  }
 }
