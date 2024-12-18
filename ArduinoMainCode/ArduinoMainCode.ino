@@ -8,6 +8,8 @@
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 String tagOLD = "";
+unsigned long lastTagTime = 0;             // Stores the time of the last detected tag
+const unsigned long clearInterval = 5000;  // Time interval to clear tagOLD (in milliseconds)
 
 void setup() {
   Serial.begin(115200);               // Initialiser serial kommunikation med PC
@@ -20,6 +22,11 @@ void setup() {
 }
 void loop() {
   delay(500);
+
+  if (millis() - lastTagTime > clearInterval) {
+    tagOLD = "";  // Reset tagOLD
+  }
+
   if (!mfrc522.PICC_IsNewCardPresent()) {  // Gør intet, hvis kortet ikke er nyt.
     Serial.println(".");
   } else {
@@ -35,7 +42,8 @@ void loop() {
       }
 
       if (tagOLD.substring(1) != tag.substring(1)) {  // Hvis UID er ukendt.
-        tagOLD = tag;
+        tagOLD = tag;                                 // Store the new tag
+        lastTagTime = millis();                       // Reset the timer
         Serial.println(tag);
       }
     }

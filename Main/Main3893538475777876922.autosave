@@ -13,24 +13,24 @@ void setup() {
 }
 
 void draw() {
-  if ( myPort.available() > 0) //Er data parat?
-{
-receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
-  if (receivedData != null && receivedData != ".") {
-    receivedData = trim(receivedData);
+}
+
+void serialEvent(Serial myPort) {
+  receivedData = myPort.readStringUntil('\n'); // Read until a newline
+  receivedData = trim(receivedData); // Remove any extra whitespace
+  println(receivedData); // Print the data to the console
+  if (receivedData != ".") {
     String hexNumber = receivedData;
     int decimalNumber = parseIntOrNull(hexNumber);
     System.out.println("Hexadecimal: " + hexNumber);
     System.out.println("Decimal: " + decimalNumber);
   }
 }
-}
 
 public Integer parseIntOrNull(String value) {
-  println(value);
     try {
         return Integer.parseInt(value);
     } catch (NumberFormatException e) {
-        return 0;
+        return null;
     }
 }
