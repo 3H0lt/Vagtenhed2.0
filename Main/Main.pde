@@ -30,8 +30,8 @@ void draw() {
       decimalNumber[i] = Integer.parseInt(dataSplitted[i],16);
      }
       println("succesfully parsed");
-        for (int i = 0; i < 4; i++) {
-          decimalNumberString += decimalNumber[i];
+        for (int i = 0; i == 3; i++) {
+          decimalNumberString = decimalNumberString + decimalNumber[i];
         }
       System.out.println("Hexadecimal: " + hexNumber);
       System.out.println("Decimal: " + decimalNumberString);
