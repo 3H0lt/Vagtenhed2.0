@@ -1,0 +1,41 @@
+
+import processing.serial.*; // Import the Serial library
+
+Serial myPort; // Declare a Serial object
+String receivedData; // Variable to store the incoming data
+String[] dataSplitted;
+void setup() {
+  size(400, 200); // Create a window
+  println(Serial.list()); // List all available serial ports
+  // Change "COM3" to the correct port name for your Arduino
+  myPort = new Serial(this, Serial.list()[2], 115200); // Initialize the serial port
+  myPort.bufferUntil('\n'); // Trigger serialEvent on newline
+}
+
+void draw() {
+  if ( myPort.available() > 0) //Er data parat?
+  {
+    receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
+
+
+    if (receivedData != null && receivedData != ".") {
+      receivedData = trim(receivedData);
+      dataSplitted = split(receivedData, ' ');
+      println(dataSplitted[0]);
+      String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
+      int decimalNumber = parseIntOrNull(hexNumber);
+      System.out.println("Hexadecimal: " + hexNumber);
+      System.out.println("Decimal: " + decimalNumber);
+    }
+  }
+}
+
+public Integer parseIntOrNull(String value) {
+  println(value);
+  try {
+    return Integer.parseInt(value);
+  }
+  catch (NumberFormatException e) {
+    return 0;
+  }
+}
