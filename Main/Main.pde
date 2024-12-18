@@ -4,6 +4,8 @@ import processing.serial.*; // Import the Serial library
 Serial myPort; // Declare a Serial object
 String receivedData; // Variable to store the incoming data
 String[] dataSplitted;
+int[] decimalNumber;
+String decimalNumberString = "";
 void setup() {
   size(400, 200); // Create a window
   println(Serial.list()); // List all available serial ports
@@ -18,15 +20,22 @@ void draw() {
     receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
 
-    if (receivedData != null && receivedData != "." && receivedData.length() < 5) {
+    if (receivedData != null && receivedData != "." && receivedData.length() > 5) {
       
       receivedData = trim(receivedData);
       dataSplitted = split(receivedData, ' ');
       println(dataSplitted[0]);
       String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
-      int decimalNumber = parseIntOrNull(hexNumber);
+     for (int i =0 ;i == 3; i++){
+      decimalNumber[i] = Integer.parseInt(dataSplitted[i],16);
+     }
+      
+        for (int i = 0; i < 4; i++) {
+          decimalNumberString += decimalNumber[i];
+        }
       System.out.println("Hexadecimal: " + hexNumber);
-      System.out.println("Decimal: " + decimalNumber);
+      System.out.println("Decimal: " + decimalNumberString);
+  
     }
   }
 }
