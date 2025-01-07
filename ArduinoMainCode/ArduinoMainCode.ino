@@ -1,17 +1,21 @@
 #include <LCD-I2C.h>
 #include <SPI.h>
 #include <MFRC522.h>
+
 #define RST_PIN D3  // Reset Pin
 #define SS_PIN D8   // NSS pin
 #define SCL_PIN D1  // ?
 #define SDA_PIN D2  // ?
 
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 String tagOLD = "";
 unsigned long lastTagTime = 0;             // Stores the time of the last detected tag
 const unsigned long clearInterval = 5000;  // Time interval to clear tagOLD (in milliseconds)
 
 void setup() {
+  lcd.begin(); // Initialize the LCD
+  lcd.backlight(); // turn on backlight
   Serial.begin(115200);               // Initialiser serial kommunikation med PC
   while (!Serial) {};                 // Vent til serial er parat
   SPI.begin();                        // Initialiser SPI bus
@@ -19,10 +23,15 @@ void setup() {
   delay(4);                           // Godt at have for nogle Bards
   Serial.println(F("Scan PICC..."));  // Skriv til serial uden at bruge RAM
   //PICC betyder "Proximity Integrated Circuit Card"
+  lcd.setCursor(0, 0);
+  lcd.print("Hello, World!");
 }
 void loop() {
-  delay(500);
-
+  delay(500); 
+  
+// rød led ikke modtager info
+// grøn led modtaget D0 og D1
+//lcd display fulde navn og nødkontakt
   if (millis() - lastTagTime > clearInterval) {
     tagOLD = "";  // Reset tagOLD
   }

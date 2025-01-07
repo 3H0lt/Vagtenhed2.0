@@ -19,19 +19,8 @@ void draw() {
   {
     receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
-
     if (receivedData != null && receivedData != ".") {
  println(receivedData);
     }
-  }
-}
-
-public Integer parseIntOrNull(String value) {
-  println(value);
-  try {
-    return Integer.parseInt(value);
-  }
-  catch (NumberFormatException e) {
-    return 0;
   }
 }
