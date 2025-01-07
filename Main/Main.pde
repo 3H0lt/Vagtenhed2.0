@@ -20,6 +20,11 @@ void draw() {
     receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
     if (receivedData != null && receivedData != ".") {
+      receivedData = trim(receivedData); // Remove leading/trailing whitespace
+      
+      // Remove spaces in between numbers
+      receivedData = receivedData.replace(" ", "");
+      
  println(receivedData);
     }
   }
