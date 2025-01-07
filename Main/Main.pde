@@ -20,27 +20,8 @@ void draw() {
     receivedData = myPort.readStringUntil('\n'); //Laes data og gem det
 
 
-    if (receivedData != null && receivedData != "." && receivedData.length() > 5) {
-       receivedData = trim(receivedData);
-      dataSplitted = split(receivedData, ' ');
-      println(dataSplitted[0]);
-      String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
-      println(hexNumber);
-      /*
-      receivedData = trim(receivedData);
-      dataSplitted = split(receivedData, ' ');
-      println(dataSplitted[0]);
-      String hexNumber = dataSplitted[0]+dataSplitted[1]+dataSplitted[2]+dataSplitted[3];
-     for (int i =0 ;i == 3; i++){
-      decimalNumber[i] = Integer.parseInt(dataSplitted[i],16);
-     }
-      println("succesfully parsed");
-        for (int i = 0; i == 3; i++) {
-          decimalNumberString = decimalNumberString + decimalNumber[i];
-        }
-      System.out.println("Hexadecimal: " + hexNumber);
-      System.out.println("Decimal: " + decimalNumberString);
-  */
+    if (receivedData != null && receivedData != ".") {
+ println(receivedData);
     }
   }
 }
