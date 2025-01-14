@@ -2,6 +2,14 @@
 //#include <LiquidCrystal.h>
 #include <SPI.h>
 #include <MFRC522.h>
+<<<<<<< Updated upstream
+=======
+#define RST_PIN D3  // Reset Pin
+#define SS_PIN D8   // NSS pin
+#define SCL_PIN D1  // ?
+#define SDA_PIN D2  // ?
+#define RED_PIN D0  // RED
+>>>>>>> Stashed changes
 
 #define RST_PIN D3    // Reset Pin
 #define SS_PIN D8     // NSS pin
