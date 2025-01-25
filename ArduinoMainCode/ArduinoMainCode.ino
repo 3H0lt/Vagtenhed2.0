@@ -45,6 +45,8 @@ void setup() {
 void loop() {
   delay(500);
 
+  lcd.print(Serial.read());
+
   // rød led ikke modtager info
   // grøn led modtaget D0 og D1
   //lcd display fulde navn og nødkontakt
@@ -53,7 +55,7 @@ void loop() {
   }
 
   if (!mfrc522.PICC_IsNewCardPresent()) {  // Gør intet, hvis kortet ikke er nyt.
-    Serial.println(".");
+  
   } else {
     if (!mfrc522.PICC_ReadCardSerial()) {  //Laes PICC
       Serial.println("Kan ikke laese UID");
@@ -73,5 +75,6 @@ void loop() {
         Serial.println(tag);
       }
     }
+
   }
 }
