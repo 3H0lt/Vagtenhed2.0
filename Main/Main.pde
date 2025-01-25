@@ -24,7 +24,7 @@ void setup() {
   
 
   // Get name from person
-  //println(festDB.getUserName(66845705));
+  //println(festDB.getUserName(66845705)); // her indsættes kortid og databasen giver et navn
 }
 
 void draw() {
